@@ -10,6 +10,7 @@ import (
 	"github.com/bayuf/project-app-portfolio-golang-bayufirmansyah/repository"
 	"github.com/bayuf/project-app-portfolio-golang-bayufirmansyah/router"
 	"github.com/bayuf/project-app-portfolio-golang-bayufirmansyah/services"
+	"github.com/bayuf/project-app-portfolio-golang-bayufirmansyah/utils"
 )
 
 func main() {
@@ -27,10 +28,14 @@ func main() {
 	// defer conn.Close(context.Background())
 
 	// init
+	logger, err := utils.InitLogger("./logs/apps-", true)
+	if err != nil {
+		fmt.Println(err)
+	}
 	repo := repository.NewRepository()
 	svc := services.NewService(repo)
-	handler := handler.NewHandler(svc, templates)
-	router := router.NewRouter(svc, handler)
+	handler := handler.NewHandler(svc, templates, logger)
+	router := router.NewRouter(svc, handler, logger)
 
 	// public folder permission
 	fs := http.FileServer(http.Dir("public"))
