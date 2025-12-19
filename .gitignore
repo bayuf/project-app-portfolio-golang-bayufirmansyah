@@ -9,12 +9,12 @@
 *.dylib
 
 # Test binary, built with `go test -c`
-*.test
+#*.test
 
 # Code coverage profiles and other test artifacts
 *.out
-coverage.*
-*.coverprofile
+#coverage.*
+#*.coverprofile
 profile.cov
 
 # Dependency directories (remove the comment below to include it)
