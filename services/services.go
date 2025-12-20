@@ -1,13 +1,16 @@
 package services
 
-import "github.com/bayuf/project-app-portfolio-golang-bayufirmansyah/repository"
+import (
+	"github.com/bayuf/project-app-portfolio-golang-bayufirmansyah/repository"
+	"go.uber.org/zap"
+)
 
 type Service struct {
-	Repo *repository.Repository
+	HomeService *HomeService
 }
 
-func NewService(repo *repository.Repository) *Service {
+func NewService(repo *repository.Repository, log *zap.Logger) *Service {
 	return &Service{
-		Repo: repo,
+		HomeService: NewHomeService(repo, log),
 	}
 }
