@@ -6,11 +6,13 @@ import (
 )
 
 type Service struct {
-	HomeService *HomeService
+	HomeService  *HomeService
+	AboutService *AboutService
 }
 
 func NewService(repo *repository.Repository, log *zap.Logger) *Service {
 	return &Service{
-		HomeService: NewHomeService(repo, log),
+		HomeService:  NewHomeService(repo, log),
+		AboutService: NewAboutService(repo, log),
 	}
 }

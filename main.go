@@ -12,15 +12,19 @@ import (
 	"github.com/bayuf/project-app-portfolio-golang-bayufirmansyah/router"
 	"github.com/bayuf/project-app-portfolio-golang-bayufirmansyah/services"
 	"github.com/bayuf/project-app-portfolio-golang-bayufirmansyah/utils"
+	"github.com/joho/godotenv"
 	"go.uber.org/zap"
 )
 
 func main() {
+	_ = godotenv.Load()
+
 	// initLogger
 	logger, err := utils.InitLogger("./logs/apps-", true)
 	if err != nil {
 		fmt.Println(err)
 	}
+
 	//initdb
 	conn, err := db.Connect(logger)
 	if err != nil {

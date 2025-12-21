@@ -24,5 +24,18 @@ func NewRouter(svc *services.Service, handl *handler.Handler, log *zap.Logger) *
 	// About
 	r.Get("/about", handl.AboutHandler.AboutpageView)
 
+	// Services
+	r.Get("/services", handl.ServicesHandler.ServicesPageView)
+
+	// Portofolio
+	r.Get("/portofolio", handl.PortofolioHandler.PortofolioPageView)
+
+	// Contact
+	r.Get("/contact", handl.ContactHandler.ContactPageView)
+	// admin pages protected
+	r.Route("/admin", func(r chi.Router) {
+
+	})
+
 	return r
 }
