@@ -3,6 +3,7 @@ package handler
 import (
 	"text/template"
 
+	"github.com/bayuf/project-app-portfolio-golang-bayufirmansyah/model"
 	"github.com/bayuf/project-app-portfolio-golang-bayufirmansyah/services"
 	"go.uber.org/zap"
 )
@@ -13,6 +14,12 @@ type Handler struct {
 	ServicesHandler   *ServicesHandler
 	PortofolioHandler *PortofolioHandler
 	ContactHandler    *ContactHandler
+}
+
+type Data struct {
+	Title   string
+	Profile *model.Profile
+	Nav     []model.NavItem
 }
 
 func NewHandler(service *services.Service, template *template.Template, logger *zap.Logger) *Handler {

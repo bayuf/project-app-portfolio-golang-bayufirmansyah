@@ -1,18 +1,31 @@
 package services
 
 import (
+	"github.com/bayuf/project-app-portfolio-golang-bayufirmansyah/model"
 	"github.com/bayuf/project-app-portfolio-golang-bayufirmansyah/repository"
 	"go.uber.org/zap"
 )
 
 type Service struct {
-	HomeService  *HomeService
-	AboutService *AboutService
+	Repo   *repository.Repository
+	Logger *zap.Logger
+
+	// cache
+	Profil *model.Profile
 }
 
 func NewService(repo *repository.Repository, log *zap.Logger) *Service {
 	return &Service{
-		HomeService:  NewHomeService(repo, log),
-		AboutService: NewAboutService(repo, log),
+		Repo:   repo,
+		Logger: log,
 	}
+}
+
+func (s *Service) GetProfile() (*model.Profile, error) {
+	if s.Profil != nil {
+		return s.Profil, nil
+	}
+
+	// get from db
+	return s.Repo.GetProfile()
 }

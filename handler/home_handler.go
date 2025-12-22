@@ -23,7 +23,18 @@ func NewHomeHandler(service *services.Service, template *template.Template, log 
 }
 
 func (h *HomeHandler) HomepageView(w http.ResponseWriter, r *http.Request) {
-	if err := h.Template.ExecuteTemplate(w, "/", nil); err != nil {
+	profile, err := h.Service.GetProfile()
+	if err != nil {
+		h.Logger.Error("cant get profil data", zap.Error(err))
+	}
+
+	data := Data{
+		Title:   "Homepage",
+		Profile: profile,
+		Nav:     BuildNav("Home"),
+	}
+
+	if err := h.Template.ExecuteTemplate(w, "/", data); err != nil {
 		h.Logger.Error("failed to execute homepage template", zap.Error(err))
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}

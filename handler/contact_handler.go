@@ -23,7 +23,17 @@ func NewContactHandler(service *services.Service, template *template.Template, l
 }
 
 func (h *ContactHandler) ContactPageView(w http.ResponseWriter, r *http.Request) {
-	if err := h.Template.ExecuteTemplate(w, "contact-page", nil); err != nil {
+	profile, err := h.Service.GetProfile()
+	if err != nil {
+		h.Logger.Error("cant get profil data", zap.Error(err))
+	}
+
+	data := Data{
+		Title:   "Contact",
+		Profile: profile,
+		Nav:     BuildNav("Contact"),
+	}
+	if err := h.Template.ExecuteTemplate(w, "contact-page", data); err != nil {
 		h.Logger.Error("failed to execute contact page template", zap.Error(err))
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}

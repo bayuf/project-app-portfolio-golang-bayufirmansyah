@@ -23,7 +23,17 @@ func NewServicesHandler(service *services.Service, template *template.Template, 
 }
 
 func (h *ServicesHandler) ServicesPageView(w http.ResponseWriter, r *http.Request) {
-	if err := h.Template.ExecuteTemplate(w, "services-page", nil); err != nil {
+	profile, err := h.Service.GetProfile()
+	if err != nil {
+		h.Logger.Error("cant get profil data", zap.Error(err))
+	}
+
+	data := Data{
+		Title:   "Services",
+		Profile: profile,
+		Nav:     BuildNav("Services"),
+	}
+	if err := h.Template.ExecuteTemplate(w, "services-page", data); err != nil {
 		h.Logger.Error("failed to execute services page template", zap.Error(err))
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}

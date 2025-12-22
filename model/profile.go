@@ -2,10 +2,11 @@ package model
 
 type Profile struct {
 	Model             Model
-	FirstName         string
-	LastName          string
-	Headline          string
-	About             string
-	ExperienceWorking int
-	AvatarUrl         string
+	FirstName         string `json:"first_name"`
+	LastName          string `json:"last_name"`
+	Headline          string `json:"headline"`
+	About             string `json:"about"`
+	Email             string `json:"email"`
+	Phone             string `json:"phone"`
+	ExperienceWorking int    `json:"experience"`
 }

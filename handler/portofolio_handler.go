@@ -23,7 +23,17 @@ func NewPortofolioHandler(service *services.Service, template *template.Template
 }
 
 func (h *PortofolioHandler) PortofolioPageView(w http.ResponseWriter, r *http.Request) {
-	if err := h.Template.ExecuteTemplate(w, "portofolio-page", nil); err != nil {
+	profile, err := h.Service.GetProfile()
+	if err != nil {
+		h.Logger.Error("cant get profil data", zap.Error(err))
+	}
+
+	data := Data{
+		Title:   "Portofolio",
+		Profile: profile,
+		Nav:     BuildNav("Portofolio"),
+	}
+	if err := h.Template.ExecuteTemplate(w, "portofolio-page", data); err != nil {
 		h.Logger.Error("failed to execute portofolio page template", zap.Error(err))
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}

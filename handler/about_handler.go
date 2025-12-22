@@ -23,7 +23,17 @@ func NewAboutHandler(service *services.Service, template *template.Template, log
 }
 
 func (h *AboutHandler) AboutpageView(w http.ResponseWriter, r *http.Request) {
-	if err := h.Template.ExecuteTemplate(w, "about-page", nil); err != nil {
+	profile, err := h.Service.GetProfile()
+	if err != nil {
+		h.Logger.Error("cant get profil data", zap.Error(err))
+	}
+
+	data := Data{
+		Title:   "About me",
+		Profile: profile,
+		Nav:     BuildNav("About"),
+	}
+	if err := h.Template.ExecuteTemplate(w, "about-page", data); err != nil {
 		h.Logger.Error("failed to execute about page template", zap.Error(err))
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}
