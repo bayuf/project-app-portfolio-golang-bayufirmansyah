@@ -35,16 +35,12 @@ func main() {
 	// init template
 	var templates = template.Must(template.New("").
 		ParseGlob("views/**/*.html"))
+
 	// init layer
 	repo := repository.NewRepository(conn, logger)
 	svc := services.NewService(repo, logger)
 	handler := handler.NewHandler(svc, templates, logger)
 	router := router.NewRouter(svc, handler, logger)
-
-	// show templates loaded
-	// for _, t := range templates.Templates() {
-	// 	fmt.Println("template:", t.Name())
-	// }
 
 	// public folder permission
 	fs := http.FileServer(http.Dir("public"))

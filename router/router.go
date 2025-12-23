@@ -18,8 +18,7 @@ func NewRouter(svc *services.Service, handl *handler.Handler, log *zap.Logger) *
 	// Panic Recover
 	r.Use(middleware.Recoverer)
 
-	// Admin
-
+	// Login
 	r.Get("/login", handl.AuthHandler.LoginView)
 	r.Post("/login", handl.AuthHandler.Login)
 
