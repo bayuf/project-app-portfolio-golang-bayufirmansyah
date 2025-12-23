@@ -28,10 +28,16 @@ func (h *PortofolioHandler) PortofolioPageView(w http.ResponseWriter, r *http.Re
 		h.Logger.Error("cant get profil data", zap.Error(err))
 	}
 
+	projects, err := h.Service.GetAllProjects()
+	if err != nil {
+		h.Logger.Error("cant get projects data", zap.Error(err))
+	}
+
 	data := Data{
-		Title:   "Portofolio",
-		Profile: profile,
-		Nav:     BuildNav("Portofolio"),
+		Title:    "Portofolio",
+		Profile:  profile,
+		Projects: projects,
+		Nav:      BuildNav("Portofolio"),
 	}
 	if err := h.Template.ExecuteTemplate(w, "portofolio-page", data); err != nil {
 		h.Logger.Error("failed to execute portofolio page template", zap.Error(err))

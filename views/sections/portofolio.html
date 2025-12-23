@@ -11,31 +11,20 @@
                 </div>
             </div>
         </div>
-        <!--<div class="filters portfolio-filter">
-      <ul>
-        <li class="active" data-filter="*">all</li>
-        <li data-filter=".popular">popular</li>
-        <li data-filter=".latest">latest</li>
-        <li data-filter=".following">following</li>
-        <li data-filter=".upcoming">upcoming</li>
-      </ul>
-    </div>-->
 
         <div class="filters-content">
             <div class="row portfolio-grid justify-content-center">
+                {{ range .Projects }}
                 <div class="col-lg-4 col-md-6 all">
                     <div class="portfolio_box">
                         <div class="single_portfolio">
                             <img
                                 class="img-fluid w-100"
-                                src="public/assets/img/portfolio/p1.jpg"
-                                alt=""
+                                src="{{ .IconURL }}"
+                                alt="{{ .Title }}-img"
                             />
                             <div class="overlay"></div>
-                            <a
-                                href="public/assets/img/portfolio/p1.jpg"
-                                class="img-gal"
-                            >
+                            <a href="{{ .IconURL }}" class="img-gal">
                                 <div class="icon">
                                     <span class="lnr lnr-cross"></span>
                                 </div>
@@ -43,16 +32,14 @@
                         </div>
                         <div class="short_info">
                             <h4>
-                                <a
-                                    href="https://github.com/bayuf/project-app-portfolio-golang-bayufirmansyah"
-                                    >Portofolio Website</a
-                                >
+                                <a href="{{ .LinkURL }}">{{ .Title }}</a>
                             </h4>
-                            <p>Web Dinamis dengan Backend Golang</p>
+                            <p>{{ .Description }}</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 all">
+                {{ end }}
+                <!--<div class="col-lg-4 col-md-6 all">
                     <div class="portfolio_box">
                         <div class="single_portfolio">
                             <img
@@ -109,7 +96,7 @@
                             <p>Golang, Cobra CLI</p>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>

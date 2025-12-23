@@ -15,14 +15,20 @@ type Handler struct {
 	PortofolioHandler *PortofolioHandler
 	ContactHandler    *ContactHandler
 	DownloadHandler   *DownloadHandler
+	AuthHandler       *AuthHandler
+	DashboardHandler  *DashboardHandler
 }
 
 type Data struct {
-	Title   string
-	Profile *model.Profile
-	Address *model.Address
-	Skills  *[]model.Skill
-	Nav     []model.NavItem
+	Title          string
+	Success, Error bool
+	Profile        *model.Profile
+	Address        *model.Address
+	Skills         *[]model.Skill
+	Offers         *[]model.Offers
+	Projects       *[]model.Project
+	Feedbacks      *[]model.Feedback
+	Nav            []model.NavItem
 }
 
 func NewHandler(service *services.Service, template *template.Template, logger *zap.Logger) *Handler {
@@ -32,7 +38,10 @@ func NewHandler(service *services.Service, template *template.Template, logger *
 		ServicesHandler:   NewServicesHandler(service, template, logger),
 		PortofolioHandler: NewPortofolioHandler(service, template, logger),
 		ContactHandler:    NewContactHandler(service, template, logger),
+		DashboardHandler:  NewDashboardHandler(service, template, logger),
 
 		DownloadHandler: NewDownloadHandler(logger),
+
+		AuthHandler: NewAuthHandler(service, template, logger),
 	}
 }

@@ -15,46 +15,15 @@
             </div>
         </div>
         <div class="row feature_inner">
+            {{ range .Offers }}
             <div class="col-lg-3 col-md-6">
                 <div class="feature_item">
-                    <img src="public/assets/img/services/s1.png" alt="" />
-                    <h4>Backend Developer</h4>
-                    <p>
-                        Creeping for female light years that lesser can't
-                        evening heaven isn't bearing tree
-                    </p>
+                    <img src="{{ .IconURL }}" alt="{{ .Title }}-icon" />
+                    <h4>{{ .Title }}</h4>
+                    <p>{{ .Description }}</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="feature_item">
-                    <img src="public/assets/img/services/s2.png" alt="" />
-                    <h4>Network Engineer</h4>
-                    <p>
-                        Creeping for female light years that lesser can't
-                        evening heaven isn't bearing tree
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="feature_item">
-                    <img src="public/assets/img/services/s3.png" alt="" />
-                    <h4>SEO Optimize</h4>
-                    <p>
-                        Creeping for female light years that lesser can't
-                        evening heaven isn't bearing tree
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="feature_item">
-                    <img src="public/assets/img/services/s4.png" alt="" />
-                    <h4>Web Developer</h4>
-                    <p>
-                        Creeping for female light years that lesser can't
-                        evening heaven isn't bearing tree
-                    </p>
-                </div>
-            </div>
+            {{ end }}
         </div>
     </div>
 </section>

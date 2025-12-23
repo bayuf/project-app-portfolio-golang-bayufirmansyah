@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/bayuf/project-app-portfolio-golang-bayufirmansyah/handler"
+	customMiddleware "github.com/bayuf/project-app-portfolio-golang-bayufirmansyah/middleware"
 	"github.com/bayuf/project-app-portfolio-golang-bayufirmansyah/services"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -16,6 +17,11 @@ func NewRouter(svc *services.Service, handl *handler.Handler, log *zap.Logger) *
 	r.Use(middleware.Logger)
 	// Panic Recover
 	r.Use(middleware.Recoverer)
+
+	// Admin
+
+	r.Get("/login", handl.AuthHandler.LoginView)
+	r.Post("/login", handl.AuthHandler.Login)
 
 	// root
 	r.Get("/", handl.HomeHandler.HomepageView)
@@ -38,9 +44,16 @@ func NewRouter(svc *services.Service, handl *handler.Handler, log *zap.Logger) *
 	r.Get("/portofolio", handl.PortofolioHandler.PortofolioPageView)
 
 	// Contact
-	r.Get("/contact", handl.ContactHandler.ContactPageView)
+	r.Route("/contact", func(r chi.Router) {
+		r.Get("/", handl.ContactHandler.ContactPageView)
+		r.Post("/send", handl.ContactHandler.SendMessageHandler)
+	})
 	// admin pages protected
-	r.Route("/admin", func(r chi.Router) {
+	r.Group(func(r chi.Router) {
+		r.Use(customMiddleware.AuthMiddleware)
+		r.Route("/admin", func(r chi.Router) {
+			r.Get("/dashboard", handl.DashboardHandler.DashboardView)
+		})
 
 	})
 

@@ -33,11 +33,17 @@ func (h *AboutHandler) AboutpageView(w http.ResponseWriter, r *http.Request) {
 		h.Logger.Error("cant get skills data", zap.Error(err))
 	}
 
+	feedbacks, err := h.Service.GetAllFeedbacks()
+	if err != nil {
+		h.Logger.Error("cant get feedback data", zap.Error(err))
+	}
+
 	data := Data{
-		Title:   "About me",
-		Profile: profile,
-		Skills:  skills,
-		Nav:     BuildNav("About"),
+		Title:     "About me",
+		Profile:   profile,
+		Skills:    skills,
+		Feedbacks: feedbacks,
+		Nav:       BuildNav("About"),
 	}
 
 	if err := h.Template.ExecuteTemplate(w, "about-page", data); err != nil {

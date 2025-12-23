@@ -32,11 +32,29 @@ func (h *HomeHandler) HomepageView(w http.ResponseWriter, r *http.Request) {
 		h.Logger.Error("cant get skills data", zap.Error(err))
 	}
 
+	offers, err := h.Service.GetAllOffers()
+	if err != nil {
+		h.Logger.Error("cant get offers data", zap.Error(err))
+	}
+
+	projects, err := h.Service.GetAllProjects()
+	if err != nil {
+		h.Logger.Error("cant get projects data", zap.Error(err))
+	}
+
+	feedbacks, err := h.Service.GetAllFeedbacks()
+	if err != nil {
+		h.Logger.Error("cant get feedback data", zap.Error(err))
+	}
+
 	data := Data{
-		Title:   "Homepage",
-		Profile: profile,
-		Skills:  skills,
-		Nav:     BuildNav("Home"),
+		Title:     "Homepage",
+		Profile:   profile,
+		Skills:    skills,
+		Offers:    offers,
+		Projects:  projects,
+		Feedbacks: feedbacks,
+		Nav:       BuildNav("Home"),
 	}
 
 	if err := h.Template.ExecuteTemplate(w, "/", data); err != nil {

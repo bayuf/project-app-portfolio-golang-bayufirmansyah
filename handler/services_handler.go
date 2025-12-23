@@ -28,10 +28,22 @@ func (h *ServicesHandler) ServicesPageView(w http.ResponseWriter, r *http.Reques
 		h.Logger.Error("cant get profil data", zap.Error(err))
 	}
 
+	offers, err := h.Service.GetAllOffers()
+	if err != nil {
+		h.Logger.Error("cant get offers data", zap.Error(err))
+	}
+
+	feedbacks, err := h.Service.GetAllFeedbacks()
+	if err != nil {
+		h.Logger.Error("cant get feedback data", zap.Error(err))
+	}
+
 	data := Data{
-		Title:   "Services",
-		Profile: profile,
-		Nav:     BuildNav("Services"),
+		Title:     "Services",
+		Profile:   profile,
+		Offers:    offers,
+		Feedbacks: feedbacks,
+		Nav:       BuildNav("Services"),
 	}
 	if err := h.Template.ExecuteTemplate(w, "services-page", data); err != nil {
 		h.Logger.Error("failed to execute services page template", zap.Error(err))

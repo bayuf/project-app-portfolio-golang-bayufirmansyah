@@ -47,9 +47,18 @@
                 </div>
             </div>
             <div class="col-lg-9">
+                {{ if .Success }}
+                <div class="alert alert-success">
+                    Pesan berhasil dikirim. Terima kasih telah menghubungi saya.
+                </div>
+                {{ else }} {{if .Error }}
+                <div class="alert alert-danger">
+                    Semua field wajib diisi dengan benar.
+                </div>
+                {{ end }}
                 <form
                     class="row contact_form"
-                    action="#"
+                    action="/contact/send"
                     method="post"
                     id="contactForm"
                     novalidate="novalidate"
@@ -104,6 +113,7 @@
                         </button>
                     </div>
                 </form>
+                {{ end }}
             </div>
         </div>
     </div>
