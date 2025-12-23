@@ -28,11 +28,18 @@ func (h *ContactHandler) ContactPageView(w http.ResponseWriter, r *http.Request)
 		h.Logger.Error("cant get profil data", zap.Error(err))
 	}
 
+	address, err := h.Service.GetAddress()
+	if err != nil {
+		h.Logger.Error("cant get address data", zap.Error(err))
+	}
+
 	data := Data{
 		Title:   "Contact",
 		Profile: profile,
+		Address: address,
 		Nav:     BuildNav("Contact"),
 	}
+
 	if err := h.Template.ExecuteTemplate(w, "contact-page", data); err != nil {
 		h.Logger.Error("failed to execute contact page template", zap.Error(err))
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)

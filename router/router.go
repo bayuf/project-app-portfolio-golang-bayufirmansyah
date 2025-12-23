@@ -20,6 +20,13 @@ func NewRouter(svc *services.Service, handl *handler.Handler, log *zap.Logger) *
 	// root
 	r.Get("/", handl.HomeHandler.HomepageView)
 
+	// Download
+	r.Route("/download", func(r chi.Router) {
+		r.Get("/cv", handl.DownloadHandler.DownloadCV)
+		r.Get("/cv-detail", handl.DownloadHandler.SeeCV)
+
+	})
+
 	// pages
 	// About
 	r.Get("/about", handl.AboutHandler.AboutpageView)

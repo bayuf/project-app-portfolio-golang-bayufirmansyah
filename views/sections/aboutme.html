@@ -1,26 +1,28 @@
 {{ define "aboutme" }}
 
 <section class="about_area section_gap">
-  <div class="container">
-    <div class="row justify-content-around align-items-center">
-      <div class="col-lg-5">
-        <div class="about_img">
-          <img class="" src="public/assets/img/about-us.png" alt="" />
-        </div>
-      </div>
+    <div class="container">
+        <div class="row justify-content-around align-items-center">
+            <div class="col-lg-5">
+                <div class="about_img">
+                    <img class="" src="public/assets/img/about-us.png" alt="" />
+                </div>
+            </div>
 
-      <div class="offset-lg-1 col-lg-5">
-        <div class="main_title text-left">
-          <h2>
-            let’s <br />
-            Introduce about <br />
-            myself
-          </h2>
-          <p>{{ .Profile.About }}</p>
-          <a class="primary_btn" href="#"><span>Download CV</span></a>
+            <div class="offset-lg-1 col-lg-5">
+                <div class="main_title text-left">
+                    <h2>
+                        let’s <br />
+                        Introduce about <br />
+                        myself
+                    </h2>
+                    <p>{{ .Profile.About }}</p>
+                    <a class="primary_btn" href="/download/cv" target="_blank"
+                        ><span>Download CV</span></a
+                    >
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
 {{ end }}

@@ -42,9 +42,9 @@ func main() {
 	router := router.NewRouter(svc, handler, logger)
 
 	// show templates loaded
-	for _, t := range templates.Templates() {
-		fmt.Println("template:", t.Name())
-	}
+	// for _, t := range templates.Templates() {
+	// 	fmt.Println("template:", t.Name())
+	// }
 
 	// public folder permission
 	fs := http.FileServer(http.Dir("public"))

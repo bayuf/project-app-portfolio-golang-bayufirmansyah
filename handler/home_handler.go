@@ -27,10 +27,15 @@ func (h *HomeHandler) HomepageView(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		h.Logger.Error("cant get profil data", zap.Error(err))
 	}
+	skills, err := h.Service.GetAllSkills()
+	if err != nil {
+		h.Logger.Error("cant get skills data", zap.Error(err))
+	}
 
 	data := Data{
 		Title:   "Homepage",
 		Profile: profile,
+		Skills:  skills,
 		Nav:     BuildNav("Home"),
 	}
 

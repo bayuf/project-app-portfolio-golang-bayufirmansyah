@@ -1,35 +1,44 @@
 {{define "/"}} {{template "head" . }}
 <!--================ Start Home Banner Area =================-->
 <section class="home_banner_area" style="overflow-x: hidden; width: 100%">
-  <div class="banner_inner">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-7">
-          <div class="banner_content">
-            <h3 class="text-uppercase">Hello I'am</h3>
-            <h1>
-              <span style="color: #4458dc">{{.Profile.FirstName}}</span>
-              {{.Profile.LastName}}.
-            </h1>
-            <h5 class="text-uppercase">{{ .Profile.Headline }}</h5>
-            <div class="d-flex align-items-center">
-              <a class="primary_btn" href="#"><span>Hire Me</span></a>
-              <a class="primary_btn tr-bg" href="#"><span>Get CV</span></a>
+    <div class="banner_inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="banner_content">
+                        <h3 class="text-uppercase">Hello I'am</h3>
+                        <h1>
+                            <span style="color: #4458dc"
+                                >{{.Profile.FirstName}}</span
+                            >
+                            {{.Profile.LastName}}.
+                        </h1>
+                        <h5 class="text-uppercase">{{ .Profile.Headline }}</h5>
+                        <div class="d-flex align-items-center">
+                            <a class="primary_btn" href="/contact"
+                                ><span>Hire Me</span></a
+                            >
+                            <a
+                                class="primary_btn tr-bg"
+                                href="/download/cv-detail"
+                                target="_blank"
+                                ><span>Get CV</span></a
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="home_right_img">
+                        <img
+                            class=""
+                            src="public/assets/img/banner/home-right.png"
+                            alt=""
+                        />
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="col-lg-5">
-          <div class="home_right_img">
-            <img
-              class=""
-              src="public/assets/img/banner/home-right.png"
-              alt=""
-            />
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
 </section>
 <!--================ End Home Banner Area =================-->
 
@@ -52,9 +61,5 @@
 <!--================ Start Testimonial Area =================-->
 {{ template "testimonial" . }}
 <!--================ End Testimonial Area =================-->
-
-<!--================ Start Newsletter Area =================-->
-<!-- {{ template "newsletter" . }} -->
-<!--================ End Newsletter Area =================-->
 
 {{template "footer" }} {{end}}

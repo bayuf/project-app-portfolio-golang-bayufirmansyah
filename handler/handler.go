@@ -14,11 +14,14 @@ type Handler struct {
 	ServicesHandler   *ServicesHandler
 	PortofolioHandler *PortofolioHandler
 	ContactHandler    *ContactHandler
+	DownloadHandler   *DownloadHandler
 }
 
 type Data struct {
 	Title   string
 	Profile *model.Profile
+	Address *model.Address
+	Skills  *[]model.Skill
 	Nav     []model.NavItem
 }
 
@@ -29,5 +32,7 @@ func NewHandler(service *services.Service, template *template.Template, logger *
 		ServicesHandler:   NewServicesHandler(service, template, logger),
 		PortofolioHandler: NewPortofolioHandler(service, template, logger),
 		ContactHandler:    NewContactHandler(service, template, logger),
+
+		DownloadHandler: NewDownloadHandler(logger),
 	}
 }

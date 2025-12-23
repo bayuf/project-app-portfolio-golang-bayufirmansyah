@@ -28,11 +28,18 @@ func (h *AboutHandler) AboutpageView(w http.ResponseWriter, r *http.Request) {
 		h.Logger.Error("cant get profil data", zap.Error(err))
 	}
 
+	skills, err := h.Service.GetAllSkills()
+	if err != nil {
+		h.Logger.Error("cant get skills data", zap.Error(err))
+	}
+
 	data := Data{
 		Title:   "About me",
 		Profile: profile,
+		Skills:  skills,
 		Nav:     BuildNav("About"),
 	}
+
 	if err := h.Template.ExecuteTemplate(w, "about-page", data); err != nil {
 		h.Logger.Error("failed to execute about page template", zap.Error(err))
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
