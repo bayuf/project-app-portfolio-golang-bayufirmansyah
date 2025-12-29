@@ -18,12 +18,12 @@ class MinimalLoginForm {
 
   bindEvents() {
     this.form.addEventListener("submit", (e) => this.handleSubmit(e));
-    this.emailInput.addEventListener("blur", () => this.validateEmail());
-    this.passwordInput.addEventListener("blur", () => this.validatePassword());
-    this.emailInput.addEventListener("input", () => this.clearError("email"));
-    this.passwordInput.addEventListener("input", () =>
-      this.clearError("password"),
-    );
+    // this.emailInput.addEventListener("blur", () => this.validateEmail());
+    // this.passwordInput.addEventListener("blur", () => this.validatePassword());
+    // this.emailInput.addEventListener("input", () => this.clearError("email"));
+    // this.passwordInput.addEventListener("input", () =>
+    //   this.clearError("password"),
+    // );
   }
 
   setupPasswordToggle() {
