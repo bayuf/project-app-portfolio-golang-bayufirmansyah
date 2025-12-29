@@ -23,17 +23,17 @@ func NewAboutHandler(service *services.Service, template *template.Template, log
 }
 
 func (h *AboutHandler) AboutpageView(w http.ResponseWriter, r *http.Request) {
-	profile, err := h.Service.GetProfile()
+	profile, err := h.Service.GetService.GetProfile()
 	if err != nil {
 		h.Logger.Error("cant get profil data", zap.Error(err))
 	}
 
-	skills, err := h.Service.GetAllSkills()
+	skills, err := h.Service.GetService.GetAllSkills()
 	if err != nil {
 		h.Logger.Error("cant get skills data", zap.Error(err))
 	}
 
-	feedbacks, err := h.Service.GetAllFeedbacks()
+	feedbacks, err := h.Service.GetService.GetAllFeedbacks()
 	if err != nil {
 		h.Logger.Error("cant get feedback data", zap.Error(err))
 	}

@@ -23,17 +23,17 @@ func NewServicesHandler(service *services.Service, template *template.Template, 
 }
 
 func (h *ServicesHandler) ServicesPageView(w http.ResponseWriter, r *http.Request) {
-	profile, err := h.Service.GetProfile()
+	profile, err := h.Service.GetService.GetProfile()
 	if err != nil {
 		h.Logger.Error("cant get profil data", zap.Error(err))
 	}
 
-	offers, err := h.Service.GetAllOffers()
+	offers, err := h.Service.GetService.GetAllOffers()
 	if err != nil {
 		h.Logger.Error("cant get offers data", zap.Error(err))
 	}
 
-	feedbacks, err := h.Service.GetAllFeedbacks()
+	feedbacks, err := h.Service.GetService.GetAllFeedbacks()
 	if err != nil {
 		h.Logger.Error("cant get feedback data", zap.Error(err))
 	}

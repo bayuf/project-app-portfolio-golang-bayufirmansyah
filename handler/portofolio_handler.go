@@ -23,12 +23,12 @@ func NewPortofolioHandler(service *services.Service, template *template.Template
 }
 
 func (h *PortofolioHandler) PortofolioPageView(w http.ResponseWriter, r *http.Request) {
-	profile, err := h.Service.GetProfile()
+	profile, err := h.Service.GetService.GetProfile()
 	if err != nil {
 		h.Logger.Error("cant get profil data", zap.Error(err))
 	}
 
-	projects, err := h.Service.GetAllProjects()
+	projects, err := h.Service.GetService.GetAllProjects()
 	if err != nil {
 		h.Logger.Error("cant get projects data", zap.Error(err))
 	}

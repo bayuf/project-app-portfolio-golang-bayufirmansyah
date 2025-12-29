@@ -12,18 +12,18 @@ class MinimalLoginForm {
   }
 
   init() {
-    this.bindEvents();
+    // this.bindEvents();
     this.setupPasswordToggle();
   }
 
   bindEvents() {
     this.form.addEventListener("submit", (e) => this.handleSubmit(e));
-    // this.emailInput.addEventListener("blur", () => this.validateEmail());
-    // this.passwordInput.addEventListener("blur", () => this.validatePassword());
-    // this.emailInput.addEventListener("input", () => this.clearError("email"));
-    // this.passwordInput.addEventListener("input", () =>
-    //   this.clearError("password"),
-    // );
+    this.emailInput.addEventListener("blur", () => this.validateEmail());
+    this.passwordInput.addEventListener("blur", () => this.validatePassword());
+    this.emailInput.addEventListener("input", () => this.clearError("email"));
+    this.passwordInput.addEventListener("input", () =>
+      this.clearError("password"),
+    );
   }
 
   setupPasswordToggle() {
@@ -37,35 +37,35 @@ class MinimalLoginForm {
   }
 
   validateEmail() {
-    const email = this.emailInput.value.trim();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // const email = this.emailInput.value.trim();
+    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!email) {
-      this.showError("email", "Email is required");
-      return false;
-    }
+    // if (!email) {
+    //   this.showError("email", "Email is required");
+    //   return false;
+    // }
 
-    if (!emailRegex.test(email)) {
-      this.showError("email", "Please enter a valid email address");
-      return false;
-    }
+    // if (!emailRegex.test(email)) {
+    //   this.showError("email", "Please enter a valid email address");
+    //   return false;
+    // }
 
     this.clearError("email");
     return true;
   }
 
   validatePassword() {
-    const password = this.passwordInput.value;
+    // const password = this.passwordInput.value;
 
-    if (!password) {
-      this.showError("password", "Password is required");
-      return false;
-    }
+    // if (!password) {
+    //   this.showError("password", "Password is required");
+    //   return false;
+    // }
 
-    if (password.length < 6) {
-      this.showError("password", "Password must be at least 6 characters");
-      return false;
-    }
+    // if (password.length < 6) {
+    //   this.showError("password", "Password must be at least 6 characters");
+    //   return false;
+    // }
 
     this.clearError("password");
     return true;

@@ -23,26 +23,27 @@ func NewHomeHandler(service *services.Service, template *template.Template, log 
 }
 
 func (h *HomeHandler) HomepageView(w http.ResponseWriter, r *http.Request) {
-	profile, err := h.Service.GetProfile()
+
+	profile, err := h.Service.GetService.GetProfile()
 	if err != nil {
 		h.Logger.Error("cant get profil data", zap.Error(err))
 	}
-	skills, err := h.Service.GetAllSkills()
+	skills, err := h.Service.GetService.GetAllSkills()
 	if err != nil {
 		h.Logger.Error("cant get skills data", zap.Error(err))
 	}
 
-	offers, err := h.Service.GetAllOffers()
+	offers, err := h.Service.GetService.GetAllOffers()
 	if err != nil {
 		h.Logger.Error("cant get offers data", zap.Error(err))
 	}
 
-	projects, err := h.Service.GetAllProjects()
+	projects, err := h.Service.GetService.GetAllProjects()
 	if err != nil {
 		h.Logger.Error("cant get projects data", zap.Error(err))
 	}
 
-	feedbacks, err := h.Service.GetAllFeedbacks()
+	feedbacks, err := h.Service.GetService.GetAllFeedbacks()
 	if err != nil {
 		h.Logger.Error("cant get feedback data", zap.Error(err))
 	}

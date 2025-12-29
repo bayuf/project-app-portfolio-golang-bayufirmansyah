@@ -13,14 +13,14 @@ import (
 )
 
 type AuthHandler struct {
-	Service  *services.Service
+	Service  *services.AuthService
 	Template *template.Template
 	Logger   *zap.Logger
 }
 
 func NewAuthHandler(service *services.Service, template *template.Template, log *zap.Logger) *AuthHandler {
 	return &AuthHandler{
-		Service:  service,
+		Service:  service.AuthService,
 		Template: template,
 		Logger:   log,
 	}
@@ -64,6 +64,7 @@ func (h *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
 	user, err := h.Service.Login(&userData)
 	if err != nil {
 		http.Error(w, "login failed", http.StatusBadRequest)
+		return
 	}
 
 	http.SetCookie(w, &http.Cookie{

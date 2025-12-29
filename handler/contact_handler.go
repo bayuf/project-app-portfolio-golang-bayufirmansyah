@@ -29,12 +29,12 @@ func (h *ContactHandler) ContactPageView(w http.ResponseWriter, r *http.Request)
 	success := r.URL.Query().Get("success") == "1"
 	error := r.URL.Query().Get("error") == "1"
 
-	profile, err := h.Service.GetProfile()
+	profile, err := h.Service.GetService.GetProfile()
 	if err != nil {
 		h.Logger.Error("cant get profil data", zap.Error(err))
 	}
 
-	address, err := h.Service.GetAddress()
+	address, err := h.Service.GetService.GetAddress()
 	if err != nil {
 		h.Logger.Error("cant get address data", zap.Error(err))
 	}
